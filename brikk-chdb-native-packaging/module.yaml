@@ -4,7 +4,7 @@ product: jvm/amper-plugin
 
 # Not published; see publish-targets.module-template.yaml for why this is applied anyway.
 apply:
-  - ../publish-targets.module-template.yaml
+  - ../../publish-targets.module-template.yaml
 
 settings:
   jvm:
