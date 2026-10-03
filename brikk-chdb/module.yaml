@@ -5,7 +5,7 @@ product: jvm/lib
 description: In-process Kotlin/JVM binding for the embedded chDB ClickHouse engine.
 
 apply:
-  - ../../publish.module-template.yaml
+  - ../publish.module-template.yaml
 
 settings:
   publishing:

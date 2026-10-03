@@ -1,8 +1,8 @@
 name: Publish Snapshot
 
 # Every push to main publishes the current -SNAPSHOT of all modules to the Central Portal
-# snapshots repo — but only after the full test suite (test.yml: build + every corpus and
-# verify gate) is green. A red gate blocks the publish (EVAL-03).
+# snapshots repo — but only after the build, API/native tests, and Maven Local publication
+# gate are green. A red gate blocks publishing.
 
 on:
   push:
