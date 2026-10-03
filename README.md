@@ -24,14 +24,14 @@ explicit native-library path. The native binary is extracted into a private,
 checksum-verified cache and loaded inside the JVM. No downloads occur at runtime.
 Windows is not currently supported. Native code remains native, not Kotlin bytecode.
 
-Latest release: **`0.16.0`**. Snapshot: **`1.0.0-SNAPSHOT`**. Native engine pin:
-**chdb-core v26.5.0**; platform manifests retain upstream URLs and SHA-256 checksums.
+Latest release: **`0.16.1`**. Snapshot: **`1.0.0-SNAPSHOT`**. Native engine pin:
+**chdb-core v26.9.0**; platform manifests retain upstream URLs and SHA-256 checksums.
 
 ```kotlin
 repositories { mavenCentral() }
 dependencies {
-    implementation("dev.brikk.house:brikk-chdb:0.16.0")
-    runtimeOnly("dev.brikk.house:brikk-chdb-native-linux-x64:0.16.0")
+    implementation("dev.brikk.house:brikk-chdb:0.16.1")
+    runtimeOnly("dev.brikk.house:brikk-chdb-native-linux-x64:0.16.1")
 }
 ```
 

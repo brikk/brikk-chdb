@@ -5,7 +5,7 @@ Brikk chDB is licensed under the Apache License 2.0 (see [LICENSE](LICENSE)).
 ## chDB and ClickHouse
 
 The `brikk-chdb-native-*` publications contain native `libchdb` binaries from
-[chdb-io/chdb-core](https://github.com/chdb-io/chdb-core), release **v26.5.0**,
+[chdb-io/chdb-core](https://github.com/chdb-io/chdb-core), release **v26.9.0**,
 using the embedded [ClickHouse](https://github.com/ClickHouse/ClickHouse) engine.
 Both projects are Apache-2.0 licensed. The Kotlin binding is written against the
 release's supported C ABI; it is not a JDBC driver and does not include code from

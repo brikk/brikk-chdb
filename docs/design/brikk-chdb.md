@@ -97,14 +97,15 @@ Use a hand-written, narrowly scoped FFM binding against the pinned header as par
 of the build/release process.  Do not check in a large jextract dump and do not
 add JNI. The phase-0 implementation binds `chdb_connect`, `chdb_close_conn`,
 `chdb_query`, `chdb_destroy_query_result`, and the materialized-result accessors.
-The module is pinned to the released `chdb-core` **v26.5.0** header and native
-archives (tag `a7bbbbb622e3f87eaa0c3a1dca31ac8461b20c61`). The macOS arm64
-archive `macos-arm64-libchdb.tar.gz` was loaded directly and passed the FFM
-`SELECT 6 * 7` smoke test. Its SHA-256 is
-`86a77d5aa775902740d312153eddfbdc641b8fd5a2e028ddfd18d002ade9ec38`.
-The narrow initial
-surface intentionally excludes the `*_rows_written` / `*_bytes_written` accessors
-that exist on current `main` but are not exported by that release.
+The module is pinned to the released `chdb-core` **v26.9.0** header and native
+archives (tag `a0976a82d90654384d772353dc28ecdd1d5e1d6e`). All ten bound function
+signatures are unchanged from v26.5.0. Platform manifests record the release URLs
+and archive SHA-256 checksums. Initial macOS arm64 validation against the
+v26.5.0 archive passed the FFM `SELECT 6 * 7` smoke test.
+The v26.9.0 Linux x64 resource JAR passed `SELECT 6 * 7`, `SELECT version()`
+(reporting ClickHouse `26.9.2.1`), query-error handling, and session reopening.
+The narrow initial surface intentionally excludes the `*_rows_written` /
+`*_bytes_written` accessors, which are not used by the Kotlin API.
 
 - Load exactly one `libchdb` through an explicit path or the matching
   `brikk-chdb-native-*` classpath artifact. Packaged resources are checksum-verified
@@ -122,7 +123,7 @@ JNI or a JDK-22-only module.
 
 ## Native consumer packaging is a release gate
 
-`brikk-chdb` pins `chdb-core` **v26.5.0**. Its GitHub release supplies standalone
+`brikk-chdb` pins `chdb-core` **v26.9.0**. Its GitHub release supplies standalone
 dynamic and static `libchdb` archives for Linux x86_64/aarch64 and macOS arm64
 (and its release manifest is the checksum authority). It does not publish a
 Maven-native artifact that Kotlin Toolchain can select by host.
@@ -213,9 +214,11 @@ above this layer.
 
 ## Validation plan
 
-1. **ABI/load** — macOS arm64: passed against the v26.5.0 release archive with
-   `SELECT 6 * 7`. Next, assert `SELECT version()` and repeated-call cleanup on
-   macOS arm64, Linux x64, and Linux arm64.
+1. **ABI/load** — macOS arm64: initially passed against the v26.5.0 release
+   archive with `SELECT 6 * 7`. Linux x64: passed against the v26.9.0 resource JAR
+   with `SELECT 6 * 7`, `SELECT version()`, query-error handling, and session
+   reopening. Validate v26.9.0 queries and repeated-call cleanup on macOS arm64
+   and Linux arm64 before claiming equivalent query coverage there.
 2. **Data/result** — query a temporary CSV/Parquet fixture in JSON, JSONEachRow,
    and ArrowStream; validate byte lengths, error handling, and resource closure.
 3. **Verifier** — valid/invalid statement and expression fixtures through

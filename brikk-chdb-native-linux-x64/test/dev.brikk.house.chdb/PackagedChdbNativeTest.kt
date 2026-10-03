@@ -67,6 +67,9 @@ object PackagedChdbProbe {
                 "chdb_destroy_query_result",
                 "chdb_result_buffer",
                 "chdb_result_length",
+                "chdb_result_elapsed",
+                "chdb_result_rows_read",
+                "chdb_result_bytes_read",
                 "chdb_result_error",
             )) {
                 check(symbols.find(name).isPresent) { "packaged libchdb does not export $name" }

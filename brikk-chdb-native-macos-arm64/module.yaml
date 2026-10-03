@@ -1,5 +1,5 @@
 product: jvm/lib
-description: chDB v26.5.0 native resource for macOS arm64.
+description: chDB v26.9.0 native resource for macOS arm64.
 
 apply:
   - ../publish.module-template.yaml
